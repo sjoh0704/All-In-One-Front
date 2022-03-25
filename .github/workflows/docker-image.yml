@@ -31,8 +31,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          tmdwn0704/all-in-one-front:latest
-          tmdwn0704/all-in-one-front:${{ env.RELEASE_VERSION }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:${{ env.RELEASE_VERSION }}
 
       
       
