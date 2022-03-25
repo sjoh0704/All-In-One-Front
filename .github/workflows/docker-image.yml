@@ -18,6 +18,8 @@ jobs:
         node-version: 12.x
 
     - name: Install dependencies
+      run: npm cache clean --force
+      run: rm -rf node_modules
       run: npm install
 
     - name: Generate build
