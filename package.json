@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
-    "jest": "^26.6.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
@@ -48,8 +47,8 @@
     ]
   },
   "devDependencies": {
-    "http-proxy-middleware": "^2.0.0",
-    "terser-webpack-plugin": "^4.2.3"
+    "http-proxy-middleware": "^2.0.0"
   },
   "proxy": "http://apigateway-service:8080"
+
 }
