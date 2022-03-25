@@ -27,7 +27,7 @@ jobs:
     needs: build-app
     runs-on: ubuntu-latest
     steps:
-   - name: Set env
+    - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
