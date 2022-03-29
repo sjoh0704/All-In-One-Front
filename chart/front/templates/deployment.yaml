@@ -26,14 +26,13 @@ spec:
           httpGet:
             path: /
             port: 3000
-          initialDelaySeconds: 80
-          periodSeconds: 10
+          initialDelaySeconds: 30
+          periodSeconds: 2
           
         readinessProbe:
           httpGet:
             path: /
             port: 3000
-          initialDelaySeconds: 80
-          periodSeconds: 10
+          periodSeconds: 2
         resources: {}
 
