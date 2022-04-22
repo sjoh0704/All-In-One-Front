@@ -15,7 +15,7 @@ metadata:
     spec:
       containers:
       - name: front-container
-        image: tmdwn0704/all-in-one-front:
+        image: tmdwn0704/all-in-one-front:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
