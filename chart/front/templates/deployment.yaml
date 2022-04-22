@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         command: ["/bin/sh", "-c"]
         args:
-        - serve -s build;
+        - npm run start;
 
         envFrom:
         - configMapRef:
