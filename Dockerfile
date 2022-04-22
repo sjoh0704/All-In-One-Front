@@ -9,5 +9,3 @@ COPY ./ ./
 RUN npm run build 
 
 EXPOSE 3000
-
-ENTRYPOINT ["serve", "-s", "build"]

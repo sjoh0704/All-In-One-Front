@@ -33,6 +33,8 @@ jobs:
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:latest
           ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:${{ env.RELEASE_VERSION }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
       
       
