@@ -48,5 +48,6 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^2.0.0"
-  }
+  },
+  "proxy": "http://api-gw:8080"
 }
