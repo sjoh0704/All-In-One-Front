@@ -1,11 +1,13 @@
 FROM node:12
 
-RUN npm install -g serve
-
 WORKDIR /app
 
 COPY ./ ./
 
+RUN npm install --silent
+
 RUN npm run build 
+
+RUN npm install -g serve
 
 EXPOSE 3000

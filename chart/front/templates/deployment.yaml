@@ -22,6 +22,10 @@ metadata:
         command: ["/bin/sh", "-c"]
         args:
         - serve -s build;
+
+        envFrom:
+        - configMapRef:
+            name: front-url
         
         livenessProbe:
           httpGet:
@@ -36,4 +40,6 @@ metadata:
             port: 3000
           periodSeconds: 2
         resources: {}
+
+
 
