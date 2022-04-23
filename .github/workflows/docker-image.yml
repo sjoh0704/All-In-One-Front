@@ -1,9 +1,12 @@
 name: Docker Image CI
 
+# on:
+#   push:
+#     tags:
+#       - 'v*'
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ master ]
       
 jobs:
   build-image:
@@ -35,6 +38,28 @@ jobs:
           ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:${{ env.RELEASE_VERSION }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+      - name: test
+        run: |
+          echo "test" >> chart/front/values.yaml
+      
+
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v4.4.0
+        with:
+          add: 'chart/front/values.yaml'
+          ref: "gh-pages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push commit
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "gh-pages"
+          force: true
+
+      
 
       
       
