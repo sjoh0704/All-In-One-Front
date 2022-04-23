@@ -1,0 +1,11 @@
+replicas: 1
+image:
+  registry: docker.io
+  repository: tmdwn0704/all-in-one-front
+  tag: latest
+  imagePullPolicy: Always
+
+service:
+  type: NodePort 
+  nodePort: 30003
+  clusterIP: 8080

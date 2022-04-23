@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: front-url
-data:
-  REACT_APP_API_GW_URL: 'http://api-gw.default.svc:8080'

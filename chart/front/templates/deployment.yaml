@@ -1,12 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front
+  name: {{ .Release.Name }}-front
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
       app: front
-  replicas: 1
+  replicas: {{ default 1 .Values.replicas }}
   template: 
     metadata:
       labels:
@@ -14,17 +15,13 @@ spec:
     spec:
       containers:
       - name: front-container
-        image: tmdwn0704/all-in-one-front:latest
+        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
         command: ["/bin/sh", "-c"]
         args:
         - npm run start;
-
-        envFrom:
-        - configMapRef:
-            name: front-url
         
         livenessProbe:
           httpGet:
