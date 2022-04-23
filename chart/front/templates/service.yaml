@@ -10,8 +10,10 @@ spec:
   - name: http
     port: {{ .Values.service.clusterIP }}
     targetPort: 3000
-    {{ if eq .Values.service.type NodePort | eq .Values.service.type LoadBalancer }}
+    {{- if eq .Values.service.type "NodePort" }}
     nodePort: {{ .Values.service.nodePort }}
-    {{ end }}
-  type: NodePort
+    {{- else if eq .Values.service.type "LoadBalancer" }}
+    nodePort: {{ .Values.service.nodePort }}
+    {{- end }}
+  type: {{ .Values.service.type }}
 
