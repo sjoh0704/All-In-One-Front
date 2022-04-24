@@ -12,7 +12,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     steps:
-    
+
     - name: Checkout 
       uses: actions/checkout@v2
       with:
@@ -59,12 +59,12 @@ jobs:
 
     - name: update manifest
       run: |
-        sed -i '/^  tag:/c\  tag: ${{ env.RELEASE_VERSION }}' chart/front/values.yaml
+        sed -i '/^  tag:/c\  tag: ${{ env.RELEASE_VERSION }}' manifest/chart/front/values.yaml
 
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.4.0
       with:
-        add: 'chart/front/values.yaml'
+        add: 'manifest/chart/front/values.yaml'
         ref: "master"
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
