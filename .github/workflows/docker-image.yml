@@ -64,7 +64,7 @@ jobs:
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.4.0
       with:
-        add: 'manifest/chart/front/values.yaml'
+        add: 'chart/front/values.yaml'
         ref: "master"
         cwd: "./manifest"
       env:
@@ -77,6 +77,7 @@ jobs:
         branch: "master"
         force: true
         repository: "sjoh0704/All-In-One"
+        directory: "./manifest"
 
       
 
