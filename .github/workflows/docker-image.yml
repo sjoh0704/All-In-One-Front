@@ -12,9 +12,10 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     steps:
+    
     - name: Checkout 
       uses: actions/checkout@v2
-      wtih:
+      with:
         path: main
 
     - name: Set version
