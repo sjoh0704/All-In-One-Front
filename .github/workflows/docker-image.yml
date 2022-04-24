@@ -63,12 +63,12 @@ jobs:
         add: 'chart/front/values.yaml'
         ref: "master"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
     - name: Push commit
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.MY_GITHUB_TOKEN }}
         branch: "master"
         force: true
 
