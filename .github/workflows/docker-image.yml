@@ -53,6 +53,8 @@ jobs:
         repository: sjoh0704/All-In-One
         ref: "master"
         path: manifest
+        persist-credentials: false
+        
 
     - name: Set version
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
@@ -67,8 +69,8 @@ jobs:
         add: 'chart/front/values.yaml'
         ref: "master"
         cwd: "./manifest"
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
     - name: Push commit
       uses: ad-m/github-push-action@master
