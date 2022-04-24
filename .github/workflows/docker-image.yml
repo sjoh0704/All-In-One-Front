@@ -43,7 +43,7 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/sjoh0704/All-In-One
+        repository: sjoh0704/All-In-One
         ref: "master"
 
     - name: update manifest
