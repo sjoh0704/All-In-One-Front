@@ -7,7 +7,13 @@ on:
 # on:
 #   push:
 #     branches: [ master ]
-      
+env:
+  APP: front
+  BASE_REPO_DIR: main
+  MANIFEST_REPO_DIR: manifest
+  MANIFEST_REPO: sjoh0704/All-In-One
+
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -16,7 +22,7 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2
       with:
-        path: main
+        path: ${{ env.BASE_REPO_DIR }}
 
     - name: Set version
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
@@ -34,11 +40,11 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./main/Dockerfile
+        file: ./${{ env.BASE_REPO_DIR }}/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-front:${{ env.RELEASE_VERSION }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-${{ env.APP }}:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/all-in-one-${{ env.APP }}:${{ env.RELEASE_VERSION }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -52,7 +58,7 @@ jobs:
       with:
         repository: sjoh0704/All-In-One
         ref: "master"
-        path: manifest
+        path: ${{ env.MANIFEST_REPO_DIR }}
         persist-credentials: false
         
     - name: Set version
@@ -60,14 +66,14 @@ jobs:
 
     - name: update manifest
       run: |
-        sed -i '/^  tag:/c\  tag: ${{ env.RELEASE_VERSION }}' manifest/chart/front/values.yaml
+        sed -i '/^  tag:/c\  tag: ${{ env.RELEASE_VERSION }}' ${{ env.MANIFEST_REPO_DIR }}/chart/${{ env.APP }}/values.yaml
 
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.4.0
       with:
-        add: 'chart/front/values.yaml'
+        add: 'chart/${{ env.APP }}/values.yaml'
         ref: "master"
-        cwd: "./manifest"
+        cwd: "./${{ env.MANIFEST_REPO_DIR }}"
 
     - name: Push commit
       uses: ad-m/github-push-action@master
@@ -75,7 +81,7 @@ jobs:
         github_token: ${{ secrets.MY_GITHUB_TOKEN }}
         branch: "master"
         force: true
-        repository: "sjoh0704/All-In-One"
-        directory: "./manifest"
+        repository: "${{ env.MANIFEST_REPO }}"
+        directory: "./${{ env.MANIFEST_REPO_DIR }}"
 
 
