@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: image-build-and-update
 
 on:
   push:
@@ -9,11 +9,13 @@ on:
 #     branches: [ master ]
       
 jobs:
+
   build-image:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
+      path: 'main'
 
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
@@ -39,6 +41,13 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+    - name: Checkout 
+      uses: actions/checkout@v2
+      with:
+        repository: https://github.com/sjoh0704/All-In-One
+        ref: "master"
+        path: 'main'
+
     - name: update manifest
       run: |
         sed -i '/^  tag:/c\  tag: ${{ env.RELEASE_VERSION }}' chart/front/values.yaml
@@ -51,12 +60,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Push commit
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: "master"
-        force: true
+    # - name: Push commit
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: "master"
+    #     force: true
 
       
 
