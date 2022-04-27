@@ -47,7 +47,7 @@ jobs:
     - name: test
       run: |
         aws s3 ls
-        aws iam list-users
+        aws ecr delete-repository       --repository-name hello-world       --force       --region ap-northeast-2
     
     # - name: Build and push
     #   uses: docker/build-push-action@v2
