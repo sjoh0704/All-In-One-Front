@@ -62,14 +62,26 @@ jobs:
     #       ${{ env.IMAGE_REGISTRY }}/${{ env.APP_NAME }}:${{ env.RELEASE_VERSION }}
     #     cache-from: type=gha
     #     cache-to: type=gha,mode=max
-    
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build and push
+      uses: docker/build-push-action@v2
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: |
-        ls -l 
-        docker build -t public.ecr.aws/x4j4s8t3/all-in-one-front:latest ./$BASE_REPO_DIR
-        docker push public.ecr.aws/x4j4s8t3/all-in-one-front:latest
+        IMAGE_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      with:
+        context: .
+        file: ./${{ env.BASE_REPO_DIR }}/Dockerfile
+        push: true
+        tags: |
+          public.ecr.aws/x4j4s8t3/all-in-one-front:latest
+          
+        cache-from: type=gha
+        cache-to: type=gha,mode=max 
+    # - name: Build, tag, and push image to Amazon ECR
+    #   env:
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #   run: |
+    #     ls -l 
+    #     docker build -t public.ecr.aws/x4j4s8t3/all-in-one-front:latest ./$BASE_REPO_DIR
+    #     docker push public.ecr.aws/x4j4s8t3/all-in-one-front:latest
 
 
 ## update manifest
