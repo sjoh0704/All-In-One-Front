@@ -14,7 +14,7 @@ env:
   MANIFEST_REPO: sjoh0704/All-In-One
   AWS_DEFAULT_REGION: ap-northeast-2
 
-permission:
+permissions:
   id-token: write
 
 jobs:
