@@ -8,7 +8,7 @@ on:
 #   push:
 #     branches: [ master ]
 env:
-  APP: front
+  APP_NAME: all-in-one-front
   MANIFEST_REPO_DIR: manifest
   MANIFEST_REPO: sjoh0704/All-In-One
   AWS_DEFAULT_REGION: ap-northeast-2
@@ -52,8 +52,8 @@ jobs:
         file: ./${{ env.BASE_REPO_DIR }}/Dockerfile
         push: true
         tags: |
-          ${{ env.IMAGE_REGISTRY }}/${{ env.APP }}:latest
-          ${{ env.IMAGE_REGISTRY }}/${{ env.APP }}:${{ env.RELEASE_VERSION }}
+          ${{ env.IMAGE_REGISTRY }}/${{ env.APP_NAME }}:latest
+          ${{ env.IMAGE_REGISTRY }}/${{ env.APP_NAME }}:${{ env.RELEASE_VERSION }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
