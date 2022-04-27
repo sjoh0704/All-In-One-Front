@@ -17,6 +17,7 @@ permissions:
   id-token: write
 
 jobs:
+## build-image
   build-image:
     runs-on: ubuntu-latest
     steps:
@@ -51,11 +52,12 @@ jobs:
         file: ./${{ env.BASE_REPO_DIR }}/Dockerfile
         push: true
         tags: |
-          ${{ env.IMAGE_REPOSITORY }}/${{ env.APP }}:latest
-          ${{ env.IMAGE_REPOSITORY }}/${{ env.APP }}:${{ env.RELEASE_VERSION }}
+          ${{ env.IMAGE_REGISTRY }}/${{ env.APP }}:latest
+          ${{ env.IMAGE_REGISTRY }}/${{ env.APP }}:${{ env.RELEASE_VERSION }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
+## update manifest
   update-manifest:
     runs-on: ubuntu-latest
     needs: build-image
