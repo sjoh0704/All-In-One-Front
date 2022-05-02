@@ -76,7 +76,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        aws ecr-public get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin public.ecr.aws/x4j4s8t3
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/x4j4s8t3
         docker build -t public.ecr.aws/x4j4s8t3/all-in-one-front:latest ./$BASE_REPO_DIR
         docker push public.ecr.aws/x4j4s8t3/all-in-one-front:latest
 
