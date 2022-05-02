@@ -76,7 +76,7 @@ jobs:
     - name: Add & Commit
       uses: EndBug/add-and-commit@v4.4.0
       with:
-        add: 'chart/${{ env.APP }}/values.yaml'
+        add: 'chart/${{ env.CHART_NAME }}/values.yaml'
         ref: "master"
         cwd: "./${{ env.MANIFEST_REPO_DIR }}"
 
