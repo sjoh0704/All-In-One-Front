@@ -11,7 +11,7 @@ export default function Home(props) {
 
     const dispatch = useDispatch();
     const fetchProducts = async () => {
-        let res = await axios.get("/apis/v1/product");
+        let res = await axios.get("/apis/v1/product/");
         let product_list = res.data.payload.filter((p) => p.valid === true);
         product_list = product_list.map((data) => {
             return {
@@ -23,7 +23,7 @@ export default function Home(props) {
     };
 
     const fetchCategory = async () => {
-        let res = await axios.get("/apis/v1/category");
+        let res = await axios.get("/apis/v1/category/");
 
         let category_list = res.data.map((data) => {
             return {

@@ -45,7 +45,7 @@ function PurchasePage({ location, history }) {
         };
         console.log(body);
         await axios
-            .post("/apis/v1/order", body)
+            .post("/apis/v1/order/", body)
             .then((res) => {
                 history.replace("/orderlist");
             })
