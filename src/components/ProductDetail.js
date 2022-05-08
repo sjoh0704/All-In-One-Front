@@ -96,7 +96,7 @@ function ProductDetail({ match, history }) {
                 buyer_id: userData.user_id,
                 product_id: parseInt(product.product_id),
             };
-            await axios.post("/apis/v1/carts/", body);
+            await axios.post("/apis/v1/carts", body);
             setLike({ checked: true });
         }
     };

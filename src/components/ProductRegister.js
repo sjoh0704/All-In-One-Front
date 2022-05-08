@@ -103,7 +103,7 @@ function ProductRegister({ history }) {
         };
 
         axios
-            .post("/apis/v1/product/", body)
+            .post("/apis/v1/product", body)
             .then((response) => {
                 history.replace("/");
             })
